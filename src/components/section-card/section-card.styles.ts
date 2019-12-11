@@ -5,5 +5,6 @@ export const StyledSectionCard = styled.section`
     border-radius: 5px;
     padding: 10px;
     background-color: #fff;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 90%;
 `;

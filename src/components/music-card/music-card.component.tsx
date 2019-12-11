@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledMusicCard } from './music-card.styles';
 import { MusicCardComponentProps } from './music-card.types';
+import under18Img from '../../assets/imgs/18-prohibited.jpg';
 
 export default ({ albumNumber, trackNumber, musicName, popularity, explicit }: MusicCardComponentProps) => {
     return (
@@ -15,7 +16,8 @@ export default ({ albumNumber, trackNumber, musicName, popularity, explicit }: M
             </div>
             <div className="info">
                 <p>{popularity} popularidade</p>
-                <p>{explicit ? '18' : ''}</p>
+                {explicit &&
+                    <img src={under18Img} alt="Under 18 year prohibited" width="50" />}
             </div>
         </StyledMusicCard>
     )
