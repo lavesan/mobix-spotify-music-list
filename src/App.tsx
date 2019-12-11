@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ThemeProvider } from 'styled-components';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import './App.css';
+import { HomePage } from './pages/home';
+import musicInfoPage from './pages/music-info/music-info.page';
+
+const theme = {
+  site: {
+    primaryColor: 'blue',
+  }
+}
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to='/home' />} />
+          <Route path="/home" component={HomePage} />
+          <Route path="/music-info" component={musicInfoPage} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 
