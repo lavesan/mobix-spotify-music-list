@@ -1,14 +1,12 @@
-import styled, { css } from 'styled-components';
-import { RangePickerCardProps } from './range-picker-card.types';
+import styled from 'styled-components';
 
-export const StyledRangePickerCard = styled.div<RangePickerCardProps>`
+export const StyledRangePickerCard = styled.div`
     border: thin solid #B3B3B3;
     border-radius: 5px;
-    padding: 8px;
-
-    ${({ width }) =>
-        css`
-            width: ${width};
-        `
-    }
+    cursor: pointer;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 `;

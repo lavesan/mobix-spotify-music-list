@@ -3,25 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { StyledRangePickerCard } from './range-picker-card';
 import { RangePickerComponentProps } from './range-picker.types';
-import { StyledRangePicker } from './range-picker.styles';
+import { StyledRangePicker, StyledRangePickerComponent, StyledValueParagraph } from './range-picker.styles';
 
 export default ({ label, initialValue }: RangePickerComponentProps) => {
     const [value, setValue] = useState<number>(initialValue);
 
     return (
-        <>
+        <StyledRangePickerComponent>
             <StyledRangePicker>
-                <StyledRangePickerCard width={'10%'} onClick={() => setValue(value - 1)}>
+                <StyledRangePickerCard onClick={() => setValue(value - 1)}>
                     <FontAwesomeIcon icon={faAngleLeft} />
                 </StyledRangePickerCard>
-                <StyledRangePickerCard width={'60%'}>
+                <StyledRangePickerCard>
                     <p>{label}</p>
                 </StyledRangePickerCard>
-                <StyledRangePickerCard width={'10%'} onClick={() => setValue(value + 1)}>
+                <StyledRangePickerCard onClick={() => setValue(value + 1)}>
                     <FontAwesomeIcon icon={faAngleRight} />
                 </StyledRangePickerCard>
             </StyledRangePicker>
-            <p>{value}</p>
-        </>
+            <StyledValueParagraph><b>{value}</b></StyledValueParagraph>
+        </StyledRangePickerComponent>
     )
 }
