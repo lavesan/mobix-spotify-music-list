@@ -22,7 +22,8 @@ export default () => {
                         options={options}
                         placeholder="Artistas" />
                     <RangePickerComponent
-                        label="Periodo" />
+                        label="Periodo"
+                        initialValue={2019} />
                 </StyledArtistsFilterBox>
             </StyledSectionCard>
             <StyledSectionCard>
