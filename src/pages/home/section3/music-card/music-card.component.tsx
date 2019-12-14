@@ -9,9 +9,9 @@ export default ({ diskNumber, trackNumber, musicName, popularity, explicit, albu
     const history = useHistory();
 
     const popularityLevel = (popularity: number): string => {
-        if (popularity >= 70)
+        if (popularity >= 65)
             return 'Alta';
-        if (popularity < 70 && popularity >= 40)
+        if (popularity < 65 && popularity >= 35)
             return 'Média';
         else
             return 'Baixa';
