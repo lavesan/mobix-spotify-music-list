@@ -51,10 +51,6 @@ export default class SpotifyService {
         return this.http.get(`/artists/${artistId}/albums?market=ES&include_groups=appears_on`);
     }
 
-    // getMusicData(trackName: string): Promise<any> {
-    //     return this.http.get(`/search?q=${trackName}&type=track`);
-    // }
-
     getMusicsByName(musicName: string): Promise<any> {
         return this.http.get(`/search?q=${musicName}&type=track`);
     }
