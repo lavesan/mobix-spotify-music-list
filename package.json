@@ -1,6 +1,7 @@
 {
   "name": "mobix-spotify-music-list",
   "version": "0.1.0",
+  "author": "Valdery Alves Paes Júnior <validery.jur@gmail.com> (http://valderyalves.com)",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
