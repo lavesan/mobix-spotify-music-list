@@ -4,6 +4,27 @@ Welcome to the spotify music list!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Pre requirements
+
+- node 8+
+- [npm](https://www.npmjs.com/get-npm)
+- yarn (optional)
+    - Run `npm i -g yarn` on terminal if you don't have
+
+## Commands
+
+### `npm run start`
+
+Run project on dev mode
+
+### `npm run build`
+
+Generates build on folder *build*
+
+### `npm run test`
+
+Run all test on the application (files with `.test.js` ou `.test.jsx` on the end)
+
 ## Project Arquiteture
 
 This project follows the architeture on [this gist](https://gist.github.com/lavesan/6ca3791dbd9fecf27bbe0ed2235595d9)
