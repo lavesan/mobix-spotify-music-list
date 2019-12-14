@@ -5,6 +5,7 @@ export const StyledMusicCard = styled.div`
     border-radius: 5px;
     padding: 10px;
     background-color: #fff;
+    min-width: 0;
     cursor: pointer;
 
     header {
@@ -28,11 +29,16 @@ export const StyledMusicCard = styled.div`
         border: 0.5px solid #ededed;
     }
 
-    .content p {
+    .content {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        color: #c2c0c0;
+        p {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #c2c0c0;
+        }
     }
 
     .info {
