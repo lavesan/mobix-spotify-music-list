@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyledMusicCard } from './music-card.styles';
 import { MusicCardComponentProps } from './music-card.types';
-import { addZeroOnNumber } from '../../utils/pipes.utils';
-import under18Img from '../../assets/imgs/18-prohibited.jpg';
+import { addZeroOnNumber } from '../../../../utils/pipes.utils';
+import under18Img from '../../../../assets/imgs/18-prohibited.jpg';
 
-export default ({ albumNumber, trackNumber, musicName, popularity, explicit }: MusicCardComponentProps) => {
+export default ({ albumNumber, trackNumber, musicName, popularity, explicit, onClick }: MusicCardComponentProps) => {
     return (
-        <StyledMusicCard>
+        <StyledMusicCard onClick={onClick}>
             <header>
                 <h2>Nº{addZeroOnNumber(albumNumber)}</h2>
                 <h2>Track {addZeroOnNumber(trackNumber)}</h2>

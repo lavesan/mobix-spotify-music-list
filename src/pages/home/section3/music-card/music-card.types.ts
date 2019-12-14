@@ -4,4 +4,5 @@ export type MusicCardComponentProps = {
     musicName: string;
     popularity: string;
     explicit: boolean;
+    onClick: () => void;
 }

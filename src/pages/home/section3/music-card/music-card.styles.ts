@@ -5,6 +5,7 @@ export const StyledMusicCard = styled.div`
     border-radius: 5px;
     padding: 10px;
     background-color: #fff;
+    cursor: pointer;
 
     header {
         display: flex;

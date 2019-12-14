@@ -44,22 +44,16 @@ export default class SpotifyService {
         return '';
     }
 
-    getArtistPlaylist(artistName: string): Promise<any> {
-        const validName = artistName.replace(/ /g, '%20');
-
-        return this.http.get(`/search?q=${validName}&type=playlist`);
+    getArtistAlbums(artistId: string): Promise<any> {
+        return this.http.get(`/artists/${artistId}/albums?market=ES&include_groups=appears_on`);
     }
 
-    getArtistAlbum(artistName: string): Promise<any> {
-        const validName = artistName.replace(/ /g, '%20');
+    // getArtistAlbums(albumName: string): Promise<any> {
+    //     return this.http.get(`/search?q=${albumName}&type=album`);
+    // }
 
-        return this.http.get(`/search?q=${validName}&type=album`);
-    }
-
-    getMusicInfo(artistName: string): Promise<any> {
-        const validName = artistName.replace(/ /g, '%20');
-
-        return this.http.get(`/search?q=${validName}&type=track`);
+    getMusicData(trackName: string): Promise<any> {
+        return this.http.get(`/search?q=${trackName}&type=track`);
     }
 
     getPlaylistTracks(playlistId: number): Promise<any> {
