@@ -4,7 +4,7 @@ import { toastNotify } from '../../utils/app.utils';
 export default class SpotifyService {
 
     private readonly http = axios.create({
-        baseURL: 'https://api.spotify.com/v1',
+        baseURL: process.env.REACT_APP_SPOTIFY_API_URL,
     })
 
     constructor() {

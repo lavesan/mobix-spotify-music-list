@@ -70,7 +70,7 @@ export default () => {
                     initialValue={2019} />
                 <StyledLogSpotifyLink
                     title="Autentique-se no spotify"
-                    href="https://accounts.spotify.com/pt-BR/authorize?client_id=f27147875f9843e9898af17332049543&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fhome">
+                    href={`https://accounts.spotify.com/pt-BR/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${process.env.REACT_APP_SPOTIFY_LOGIN_REDIRECT_URI}`}>
                     <FontAwesomeIcon icon={faSpotify} />&nbsp;&nbsp;<span>Logar-se no spotify</span>
                 </StyledLogSpotifyLink>
             </StyledArtistsFilterBox>
