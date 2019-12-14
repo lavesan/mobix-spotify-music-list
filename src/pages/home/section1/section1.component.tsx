@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyledH2 } from '../home.styles';
 import { StyledArtistsFilterBox, StyledLogSpotifyLink } from './section1.styles';
 import { SelectComponent } from './select';
@@ -7,6 +7,7 @@ import { AppContext } from '../../../app/App.context';
 import { HomePageContext } from '../home.context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { MusicCardList } from '../section3/music-card/music-card.types';
 
 export default () => {
     const options = [
@@ -17,7 +18,7 @@ export default () => {
         { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga' },
     ];
     const { spotifyService } = useContext(AppContext);
-    const { setChartData } = useContext(HomePageContext);
+    const { setChartData, setMusicsListed, musicsListed } = useContext(HomePageContext);
     const handleChooseArtist = async ({ value }: any) => {
         const albums = await spotifyService.getArtistAlbums(value);
         if (albums) {
@@ -29,6 +30,29 @@ export default () => {
             })))
         }
     }
+
+    useEffect(() => {
+        // Gets all top tracks of all artists on the select option
+        (async () => {
+            let musicTracks: MusicCardList[] = [];
+            for(const { value } of options) {
+                const artistTopTrack = await spotifyService.getArtistTopTrack(value);
+                if (artistTopTrack) {
+                    musicTracks = [
+                        ...musicTracks,
+                        ...artistTopTrack.tracks.map(({ disc_number, explicit, name, popularity, track_number }: any) => ({
+                            explicit,
+                            popularity,
+                            diskNumber: disc_number,
+                            trackNumber: track_number,
+                            musicName: name,
+                        }))
+                    ]
+                }
+            }
+            setMusicsListed(musicTracks);
+        })()
+    }, [spotifyService]);
 
     return (
         <>
