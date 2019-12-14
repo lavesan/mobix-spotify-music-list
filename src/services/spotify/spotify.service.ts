@@ -56,6 +56,10 @@ export default class SpotifyService {
         return this.http.get(`/search?q=${trackName}&type=track`);
     }
 
+    getMusicsByName(musicName: string): Promise<any> {
+        return this.http.get(`/search?q=${musicName}&type=track`);
+    }
+
     getPlaylistTracks(playlistId: number): Promise<any> {
         return this.http.get('/playlists/{playlist_id}/tracks');
     }

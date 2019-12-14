@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Route, BrowserRouter as Router, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import { HomePage } from '../pages/home';
 import musicInfoPage from '../pages/music-info/music-info.page';

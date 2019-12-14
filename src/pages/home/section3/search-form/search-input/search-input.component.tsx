@@ -3,11 +3,11 @@ import { StyledSearchFieldset, StyledSearchInput, StyledSearchIcon } from './sea
 import { SearchInputComponentProps } from './search-input.types';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-export default ({ name, placeholder, onChange }: SearchInputComponentProps) => {
+export default ({ name, placeholder, onChange, value, invalid }: SearchInputComponentProps) => {
     return (
         <StyledSearchFieldset>
-            <StyledSearchIcon icon={faSearch} />
-            <StyledSearchInput type="text" placeholder={placeholder} name={name} onChange={onChange} />
+            <StyledSearchIcon invalidinput={invalid} icon={faSearch} />
+            <StyledSearchInput type="text" placeholder={placeholder} value={value} invalidinput={invalid} name={name} onChange={onChange} />
         </StyledSearchFieldset>
     )
 }
