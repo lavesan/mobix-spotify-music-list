@@ -6,4 +6,8 @@ export const StyledSectionCard = styled.section`
     padding: 10px 50px;
     background-color: #fff;
     width: 80%;
+
+    @media(max-width: 570px) {
+        padding: 10px 20px;
+    }
 `;
