@@ -65,7 +65,9 @@ export default () => {
                 <RangePickerComponent
                     label="Periodo"
                     initialValue={2019} />
-                <StyledLogSpotifyLink href="https://accounts.spotify.com/pt-BR/authorize?client_id=f27147875f9843e9898af17332049543&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fhome">
+                <StyledLogSpotifyLink
+                    title="Autentique-se no spotify"
+                    href="https://accounts.spotify.com/pt-BR/authorize?client_id=f27147875f9843e9898af17332049543&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fhome">
                     <FontAwesomeIcon icon={faSpotify} />&nbsp;&nbsp;Logar-se no spotify
                 </StyledLogSpotifyLink>
             </StyledArtistsFilterBox>

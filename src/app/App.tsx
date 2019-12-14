@@ -7,6 +7,8 @@ import musicInfoPage from '../pages/music-info/music-info.page';
 import { StyledPagesContainer } from './App.styles';
 import { AppContext } from './App.context';
 import { SpotifyService } from '../services/spotify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = {
   site: {
@@ -31,6 +33,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={{ spotifyService }}>
+        <ToastContainer />
         <StyledPagesContainer>
           <Router>
             <Switch>

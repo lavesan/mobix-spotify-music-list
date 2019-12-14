@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { toastNotify } from '../../utils/app.utils';
 
 export default class SpotifyService {
 
@@ -8,7 +9,9 @@ export default class SpotifyService {
 
     constructor() {
         this.http.interceptors.request.use((request: AxiosRequestConfig) => this.addRequestAuthorization(request));
-        this.http.interceptors.response.use((response: AxiosResponse) => response.data);
+        this.http.interceptors.response.use(
+            (response: AxiosResponse) => response.data,
+            () => toastNotify({ type: 'error', message: 'Se conecte no spotify para utilizar este site!' }));
     }
 
     private addRequestAuthorization(request: AxiosRequestConfig) {

@@ -11,7 +11,7 @@ import { HomePageContext } from '../../home.context';
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
-    const { setMusicsListed } = useContext(HomePageContext);
+    const { setMusicsListed, musicsListed } = useContext(HomePageContext);
     const [initialValues] = useState<MusicSearchValues>({
         music: '',
     });

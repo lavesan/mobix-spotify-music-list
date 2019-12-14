@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 /**
  * @description 
  * Transforms all keys and values of a string with queryStrings
@@ -17,4 +19,15 @@ export const queryStringToObject = function(stringWithQueryString: string = ''):
         return obj;
     }
     return null;
+}
+
+export const toastNotify = function({ type, message }: { type: 'error', message: string }) {
+    toast[type](message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    });
 }
