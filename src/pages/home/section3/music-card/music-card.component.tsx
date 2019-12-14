@@ -3,8 +3,11 @@ import { StyledMusicCard } from './music-card.styles';
 import { MusicCardComponentProps } from './music-card.types';
 import { addZeroOnNumber } from '../../../../utils/pipes.utils';
 import under18Img from '../../../../assets/imgs/18-prohibited.jpg';
+import { useHistory } from 'react-router';
 
-export default ({ diskNumber, trackNumber, musicName, popularity, explicit, onClick }: MusicCardComponentProps) => {
+export default ({ diskNumber, trackNumber, musicName, popularity, explicit, albumId }: MusicCardComponentProps) => {
+    const history = useHistory();
+
     const popularityLevel = (popularity: number): string => {
         if (popularity >= 70)
             return 'Alta';
@@ -15,7 +18,10 @@ export default ({ diskNumber, trackNumber, musicName, popularity, explicit, onCl
     }
 
     return (
-        <StyledMusicCard onClick={onClick}>
+        <StyledMusicCard onClick={() => history.push({
+            pathname: '/music-info',
+            search: `?albumId=${albumId}`,
+        })}>
             <header>
                 <h2>Nº{addZeroOnNumber(diskNumber)}</h2>
                 <h2>Track {addZeroOnNumber(trackNumber)}</h2>

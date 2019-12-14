@@ -6,12 +6,12 @@ import { HomePageContext } from './home.context';
 import { AppContext } from '../../app/App.context';
 import { SectionTwoComponent } from './section2';
 import { SectionThreeComponent } from './section3';
-import { MusicCardList } from './section3/music-card/music-card.types';
+import { MusicCardComponentProps } from './section3/music-card/music-card.types';
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
     const [chartData, setChartData] = useState();
-    const [musicsListed, setMusicsListed] = useState<MusicCardList[]>([]);
+    const [musicsListed, setMusicsListed] = useState<MusicCardComponentProps[]>([]);
 
     useEffect(() => {
         const authToken = queryStringToObject(window.location.href);

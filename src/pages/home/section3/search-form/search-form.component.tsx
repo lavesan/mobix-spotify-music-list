@@ -11,7 +11,7 @@ import { HomePageContext } from '../../home.context';
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
-    const { setMusicsListed, musicsListed } = useContext(HomePageContext);
+    const { setMusicsListed } = useContext(HomePageContext);
     const [initialValues] = useState<MusicSearchValues>({
         music: '',
     });
@@ -19,9 +19,10 @@ export default () => {
     const handleSubmit = async ({ music }: MusicSearchValues) => {
         const musics = await spotifyService.getMusicsByName(music);
         if (musics) {
-            setMusicsListed(musics.tracks.items.map(({ name, track_number, disc_number, popularity, explicit }: any) => ({
+            setMusicsListed(musics.tracks.items.map(({ name, track_number, disc_number, popularity, explicit, album: { id } }: any) => ({
                 explicit,
                 popularity,
+                albumId: id,
                 diskNumber: disc_number,
                 trackNumber: track_number,
                 musicName: name, 

@@ -1,8 +1,5 @@
-export type MusicCardComponentProps = MusicCardList & {
-    onClick: () => void;
-}
-
-export type MusicCardList = {
+export type MusicCardComponentProps = {
+    albumId: string;
     diskNumber: number;
     trackNumber: number;
     musicName: string;

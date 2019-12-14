@@ -7,9 +7,12 @@ import { AppContext } from '../../../app/App.context';
 import { HomePageContext } from '../home.context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
-import { MusicCardList } from '../section3/music-card/music-card.types';
+import { MusicCardComponentProps } from '../section3/music-card/music-card.types';
 
 export default () => {
+    const { spotifyService } = useContext(AppContext);
+    const { setChartData, setMusicsListed } = useContext(HomePageContext);
+
     const options = [
         { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.' },
         { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera' },
@@ -17,8 +20,7 @@ export default () => {
         { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts' },
         { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga' },
     ];
-    const { spotifyService } = useContext(AppContext);
-    const { setChartData, setMusicsListed, musicsListed } = useContext(HomePageContext);
+
     const handleChooseArtist = async ({ value }: any) => {
         const albums = await spotifyService.getArtistAlbums(value);
         if (albums) {
@@ -34,15 +36,16 @@ export default () => {
     useEffect(() => {
         // Gets all top tracks of all artists on the select option
         (async () => {
-            let musicTracks: MusicCardList[] = [];
+            let musicTracks: MusicCardComponentProps[] = [];
             for(const { value } of options) {
                 const artistTopTrack = await spotifyService.getArtistTopTrack(value);
                 if (artistTopTrack) {
                     musicTracks = [
                         ...musicTracks,
-                        ...artistTopTrack.tracks.map(({ disc_number, explicit, name, popularity, track_number }: any) => ({
+                        ...artistTopTrack.tracks.map(({ disc_number, explicit, name, popularity, track_number, album: { id } }: any) => ({
                             explicit,
                             popularity,
+                            albumId: id,
                             diskNumber: disc_number,
                             trackNumber: track_number,
                             musicName: name,
@@ -52,7 +55,7 @@ export default () => {
             }
             setMusicsListed(musicTracks);
         })()
-    }, [spotifyService]);
+    }, [spotifyService, options, setMusicsListed]);
 
     return (
         <>

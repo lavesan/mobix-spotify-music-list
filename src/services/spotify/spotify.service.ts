@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toastNotify } from '../../utils/app.utils';
 
 export default class SpotifyService {
@@ -51,9 +51,9 @@ export default class SpotifyService {
         return this.http.get(`/artists/${artistId}/albums?market=ES&include_groups=appears_on`);
     }
 
-    getMusicData(trackName: string): Promise<any> {
-        return this.http.get(`/search?q=${trackName}&type=track`);
-    }
+    // getMusicData(trackName: string): Promise<any> {
+    //     return this.http.get(`/search?q=${trackName}&type=track`);
+    // }
 
     getMusicsByName(musicName: string): Promise<any> {
         return this.http.get(`/search?q=${musicName}&type=track`);
@@ -63,7 +63,7 @@ export default class SpotifyService {
         return this.http.get(`/artists/${artistId}/top-tracks?market=ES`);
     }
 
-    getPlaylistTracks(playlistId: number): Promise<any> {
-        return this.http.get('/playlists/{playlist_id}/tracks');
+    getAlbumData(albumId: string): Promise<any> {
+        return this.http.get(`/albums/${albumId}`);
     }
 }
