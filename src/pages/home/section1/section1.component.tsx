@@ -8,27 +8,29 @@ import { HomePageContext } from '../home.context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { MusicCardComponentProps } from '../section3/music-card/music-card.types';
+import * as am4core from "@amcharts/amcharts4/core";
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
     const { setChartData, setMusicsListed } = useContext(HomePageContext);
 
     const options = [
-        { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.' },
-        { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera' },
-        { value: '1dfeR4HaWDbWqFHLkxsg1d', label: 'Queen' },
-        { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts' },
-        { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga' },
+        { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.', color: 'gray' },
+        { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera', color: 'red' },
+        { value: '1dfeR4HaWDbWqFHLkxsg1d', label: 'Queen', color: 'black' },
+        { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts', color: '#aaa' },
+        { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga', color: 'green' },
     ];
 
-    const handleChooseArtist = async ({ value }: any) => {
+    const handleChooseArtist = async ({ value, color }: any) => {
         const albums = await spotifyService.getArtistAlbums(value);
         if (albums) {
             setChartData(albums.items.map(({ id, name, release_date, total_tracks }: any) => ({
-                id: id,
-                name: name,
+                albumId: id,
+                albumName: name,
                 releaseDate: release_date,
                 totalTrack: total_tracks,
+                color: am4core.color(color)
             })))
         }
     }
@@ -55,7 +57,7 @@ export default () => {
             }
             setMusicsListed(musicTracks);
         })()
-    }, [spotifyService, options, setMusicsListed]);
+    }, []);
 
     return (
         <>

@@ -7,10 +7,11 @@ import { AppContext } from '../../app/App.context';
 import { SectionTwoComponent } from './section2';
 import { SectionThreeComponent } from './section3';
 import { MusicCardComponentProps } from './section3/music-card/music-card.types';
+import { BarChartData } from './section2/bar-chart/bar-chart.types';
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
-    const [chartData, setChartData] = useState();
+    const [chartData, setChartData] = useState<BarChartData[]>([]);
     const [musicsListed, setMusicsListed] = useState<MusicCardComponentProps[]>([]);
 
     useEffect(() => {
