@@ -67,9 +67,7 @@ export default () => {
                     options={options}
                     placeholder="Artistas"
                     onChange={handleChooseArtist} />
-                <RangePickerComponent
-                    label="Periodo"
-                    initialValue={2019} />
+                <RangePickerComponent label="Periodo" />
                 <StyledLogSpotifyLink
                     title="Autentique-se no spotify"
                     href={`https://accounts.spotify.com/pt-BR/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${process.env.REACT_APP_SPOTIFY_LOGIN_REDIRECT_URI}`}>

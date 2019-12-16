@@ -13,6 +13,7 @@ export default () => {
     const { spotifyService } = useContext(AppContext);
     const [chartData, setChartData] = useState<BarChartData[]>([]);
     const [musicsListed, setMusicsListed] = useState<MusicCardComponentProps[]>([]);
+    const [selectedYear, setSelectedYear] = useState<number>(2019);
 
     useEffect(() => {
         const authToken = queryStringToObject(window.location.href);
@@ -22,7 +23,7 @@ export default () => {
     }, [spotifyService]);
 
     return (
-        <HomePageContext.Provider value={{ chartData, setChartData, musicsListed, setMusicsListed }}>
+        <HomePageContext.Provider value={{ chartData, setChartData, musicsListed, setMusicsListed, selectedYear, setSelectedYear }}>
             <StyledSectionCard>
                 <SectionOneComponent />
             </StyledSectionCard>

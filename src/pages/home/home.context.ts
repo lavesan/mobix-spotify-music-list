@@ -1,13 +1,17 @@
 import React from 'react';
+import { BarChartData } from './section2/bar-chart/bar-chart.types';
+import { MusicCardComponentProps } from './section3/music-card/music-card.types';
 
-export const HomePageContext = React.createContext({ 
+export const HomePageContext = React.createContext({
+    selectedYear: 0,
+    setSelectedYear: (param: number) => {},
     chartData: [{
         albumId: '',
         albumName: '',
         releaseDate: '',
         totalTrack: 0,
     }], 
-    setChartData: (param: any) => {},
+    setChartData: (param: BarChartData[]) => {},
     musicsListed: [{
         albumId: '',
         diskNumber: 0,
@@ -16,5 +20,5 @@ export const HomePageContext = React.createContext({
         popularity: 0,
         explicit: false,
     }],
-    setMusicsListed: (param: any) => {},
+    setMusicsListed: (param: MusicCardComponentProps[]) => {},
 });
