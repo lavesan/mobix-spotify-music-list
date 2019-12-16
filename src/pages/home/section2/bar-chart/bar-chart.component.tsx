@@ -15,10 +15,9 @@ export default () => {
     if (chart) {
       const data = chartData.map(({ releaseDate, ...data }) => ({
         ...data,
-        releaseDate: moment(releaseDate).format('YYYY'),
+        releaseDate: moment(releaseDate).toDate(),
       }))
 
-      console.log('data: ', data);
       chart.data = data;
     }
   }, [chartData]);
@@ -33,25 +32,31 @@ export default () => {
 
     // Create axes
 
-    let categoryAxis = chartRef.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "releaseDate";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 30;
+    let dateAxis = chartRef.xAxes.push(new am4charts.DateAxis());
+    dateAxis.dataFields.date = "releaseDate";
+    dateAxis.renderer.grid.template.location = 0;
+    dateAxis.renderer.minGridDistance = 30;
 
-    categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+    dateAxis.renderer.opposite = true;
+    dateAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
       // & 2 == 2
       if (target.dataItem && target.dataItem.index && dy) {
         return dy + 25;
       }
       return dy;
     });
+    // Sets to show only the year, on a interval of year by year
+    dateAxis.baseInterval = {
+      timeUnit: 'year',
+      count: 1,
+    }
 
     let valueAxis = chartRef.yAxes.push(new am4charts.ValueAxis());
 
     // Create series
     let series = chartRef.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = "totalTrack";
-    series.dataFields.categoryX = "releaseDate";
+    series.dataFields.dateX = "releaseDate";
     series.name = "Total de músicas";
     series.columns.template.tooltipText = "[bold]{albumName}[/]";
     series.columns.template.fillOpacity = .8;
@@ -69,22 +74,8 @@ export default () => {
     let columnTemplate = series.columns.template;
     columnTemplate.strokeWidth = 0;
 
-    // Create slider
-    let sliderContainer = chartRef.createChild(am4core.Container);
-    sliderContainer.marginTop = am4core.percent(5);
-    sliderContainer.width = am4core.percent(80);
-    sliderContainer.align = "center";
-    sliderContainer.paddingRight = 120;
-
-    // let label = sliderContainer.createChild(am4core.Label);
-    // label.text = "Deslize o dedo aqui!";
-    // label.dy = -40;
-    // label.isMeasured = false;
-
-    let slider = sliderContainer.createChild(am4core.Slider);
-    slider.start = 0;
-    slider.background.fill = am4core.color("#676767");
-    slider.background.fillOpacity = 0.2;
+    // Adds X scrollbar
+    chartRef.scrollbarX = new am4core.Scrollbar();
 
     setChart(chartRef);
   }, []);
