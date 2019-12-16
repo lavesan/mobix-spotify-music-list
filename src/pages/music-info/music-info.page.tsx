@@ -12,9 +12,11 @@ export default () => {
 
     useEffect(() => {
         const albumData = queryStringToObject(window.location.href);
+        
         if (albumData) {
             (async () => {
                 const album = await spotifyService.getAlbumData(albumData.albumId);
+
                 if (album) {
                     const { name, tracks, popularity, release_date, total_tracks, artists, images } = album;
 
@@ -32,7 +34,6 @@ export default () => {
                         totalTracks: total_tracks,
                         imgUrl: images[0].url,
                     });
-                    console.log('albumInfo: ', albumInfo);
                 } else {
                     history.push('home');
                 }

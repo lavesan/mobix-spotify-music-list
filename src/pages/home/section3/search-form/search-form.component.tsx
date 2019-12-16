@@ -17,7 +17,8 @@ export default () => {
     });
 
     const handleSubmit = async ({ music }: MusicSearchValues) => {
-        const musics = await spotifyService.getMusicsByName(music);
+        const musics = await spotifyService.getTracksByName(music);
+
         if (musics) {
             setMusicsListed(musics.tracks.items.map(({ name, track_number, disc_number, popularity, explicit, album: { id } }: any) => ({
                 explicit,
