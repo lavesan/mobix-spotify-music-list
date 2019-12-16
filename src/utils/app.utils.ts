@@ -21,7 +21,7 @@ export const queryStringToObject = function(stringWithQueryString: string = ''):
     return null;
 }
 
-export const toastNotify = function({ type, message }: { type: 'error', message: string }) {
+export const toastNotify = function({ type, message }: { type: 'error', message: string }): void {
     toast[type](message, {
         position: "top-right",
         autoClose: 5000,
