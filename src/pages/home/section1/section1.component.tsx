@@ -39,8 +39,10 @@ export default () => {
         // Gets all top tracks of all artists on the select option
         (async () => {
             let musicTracks: MusicCardComponentProps[] = [];
+
             for(const { value } of options) {
-                const artistTopTrack = await spotifyService.getArtistTopTrack(value);
+                const artistTopTrack = await spotifyService.getArtistTopTracks(value);
+
                 if (artistTopTrack) {
                     musicTracks = [
                         ...musicTracks,
@@ -53,6 +55,8 @@ export default () => {
                             musicName: name,
                         }))
                     ]
+                } else {
+                    break;
                 }
             }
             setMusicsListed(musicTracks);
