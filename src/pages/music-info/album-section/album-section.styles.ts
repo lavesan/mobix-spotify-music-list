@@ -25,15 +25,25 @@ export const StyledMusicInfoComponent = styled.section`
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+    @media(max-width: 650px) {
+        margin-bottom: 50px;
+    }
 `;
 
 export const StyledTrackComponent = styled.header`
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-column-gap: 40px;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 40px;
     min-height: 0;
     min-width: 0;
     min-width: 0;
+
+    @media(max-width: 650px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 export const StyledAlbumImageBox = styled.div`
