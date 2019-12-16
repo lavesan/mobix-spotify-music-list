@@ -74,6 +74,11 @@ export default () => {
     let columnTemplate = series.columns.template;
     columnTemplate.strokeWidth = 0;
 
+    if (series.tooltip) {
+      series.tooltip.getFillFromObject = false;
+      series.tooltip.background.fill = am4core.color("#212121");
+    }
+
     // Adds X scrollbar
     chartRef.scrollbarX = new am4core.Scrollbar();
 
