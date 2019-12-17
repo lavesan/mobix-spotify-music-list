@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests \`StyledSectionCard\`  Matches snapshot  1`] = `
+.c0 {
+  box-shadow: 0 0 6px #c2c2c2;
+  border-radius: 5px;
+  padding: 10px 50px;
+  background-color: #fff;
+  width: 80%;
+}
+
+@media (max-width:570px) {
+  .c0 {
+    padding: 10px 20px;
+  }
+}
+
+<section
+  className="c0"
+/>
+`;
