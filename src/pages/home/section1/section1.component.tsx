@@ -16,10 +16,10 @@ export default () => {
 
     const [options] = useState(
         [
-            { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.', color: 'gray' },
-            { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera', color: 'red' },
+            { value: '6olE6TJLqED3rqDCT0FyPh', label: 'Nirvana', color: 'gray' },
+            { value: '4NpFxQe2UvRCAjto3JqlSl', label: 'Gretta Van Fleet', color: 'red' },
             { value: '1dfeR4HaWDbWqFHLkxsg1d', label: 'Queen', color: 'black' },
-            { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts', color: '#aaa' },
+            { value: '7HnkRhoGqYLTasI52iJoE7', label: 'Chico Science', color: '#aaa' },
             { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga', color: 'green' },
         ]
     );
@@ -27,13 +27,17 @@ export default () => {
     const handleChooseArtist = async ({ value, color }: any) => {
         const albums = await spotifyService.getArtistAlbums(value);
         if (albums) {
-            setChartData(albums.items.map(({ id, name, release_date, total_tracks }: any) => ({
+            // Filter to get only the albums and remove the compilations
+            const onlyAlbumsArr = albums.items.filter(({ album_type }: any) => album_type === 'album');
+            const mapToChartData = onlyAlbumsArr.map(({ id, name, release_date, total_tracks }: any) => ({
                 albumId: id,
                 albumName: name,
                 releaseDate: release_date,
                 totalTrack: total_tracks,
                 color: am4core.color(color)
-            })))
+            }));
+
+            setChartData(mapToChartData);
         }
     }
 
