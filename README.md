@@ -25,6 +25,12 @@ Generates build on folder *build*
 
 Run all test on the application (files with `.test.js` ou `.test.jsx` on the end)
 
+## Using website
+
+You will need to log into spotify to use, just click on 'Logar-se ao spotify' and access with your credentials
+
+> If your account is not premium, you will be able to use but the requests will be limited.
+
 ## Project Arquiteture
 
 This project follows the architeture on [this gist](https://gist.github.com/lavesan/6ca3791dbd9fecf27bbe0ed2235595d9)
