@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
  * @param {string} stringWithQueryString 
  * @returns {{ [key: string]: string }} Object containing the query string
  */
-export const queryStringToObject = function(stringWithQueryString: string = ''): { [key: string]: string } | null {
+export const queryStringToObject = function(stringWithQueryString: string = ''): any | null {
     const queries = stringWithQueryString.match(/\w+=[^&]+/g);
     if (queries) {
         const obj: { [key: string]: string } = {};

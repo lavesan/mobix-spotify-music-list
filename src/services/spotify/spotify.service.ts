@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toastNotify } from '../../utils/app.utils';
+import { SaveAuthTokenParams } from './spotify.types';
 
 export default class SpotifyService {
 
@@ -8,13 +9,20 @@ export default class SpotifyService {
     })
 
     constructor() {
+        // Interceptor for request
         this.http.interceptors.request.use((request: AxiosRequestConfig) => this.addRequestAuthorization(request));
+        
+        // Interceptor for response
         this.http.interceptors.response.use(
             (response: AxiosResponse) => response.data,
             () => toastNotify({ type: 'error', message: 'Se conecte no spotify para utilizar este site!' }));
     }
 
-    private addRequestAuthorization(request: AxiosRequestConfig) {
+    /**
+     * @description Adds token auth on request header 
+     * @param {AxiosRequestConfig} request 
+     */
+    private addRequestAuthorization(request: AxiosRequestConfig): AxiosRequestConfig {
         const token = this.getObjectCookie('token');
         if (token) {
             const { token_type, access_token } = token;
@@ -27,13 +35,20 @@ export default class SpotifyService {
         return request;
     }
 
-    // TODO: Colocar o tipo do parâmetro
-    // { access_token: string, token_type: 'Bearer', expires_in: number }
-    saveAuthOnCookie({ expires_in, ...tokenData }: any): void {
+    /**
+     * @description Saver auth token on the browser cookies
+     * @param param0 
+     */
+    saveAuthOnCookie({ expires_in, ...tokenData }: SaveAuthTokenParams): void {
         const authString = JSON.stringify(tokenData);
         document.cookie = `token=${authString};Max-Age=${expires_in}`;
     }
 
+    /**
+     * @description Gets an object by the key name from the cookie
+     * @param {string} cookieName
+     * @returns Object if exists and empty string if don't 
+     */
     getObjectCookie(cookieName: string): { [key: string]: any } | '' {
         const cookies = document.cookie.split(';');
         const cokRegex = new RegExp(`${cookieName}=`);

@@ -2,9 +2,10 @@ import React, { useEffect, useContext, useState, useCallback } from 'react';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import moment from 'moment';
+
 import { HomePageContext } from '../../home.context';
 import { AppContext } from '../../../../app/App.context';
-import moment from 'moment';
 
 export default () => {
   const { spotifyService } = useContext(AppContext);
