@@ -1,12 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import { NavLink } from 'react-router-dom';
 import { AlbumSectionProps } from './album-section.types';
 import { StyledH2 } from '../../home/home.styles';
 import { StyledMusicInfoComponent, StyledTrackComponent, StyledTrackInfo, StyledAlbumImageBox, StyledMusicsBox, StyledCardHeader, StyledReturnButton } from './album-section.styles';
 import { TrackCardComponent } from './track-card';
 
-export default ({ albumName, popularity, tracks, artistsNames, releaseDate, totalTracks, imgUrl }: AlbumSectionProps) => {
+export default ({ albumName, tracks, artistsNames, releaseDate, totalTracks, imgUrl }: AlbumSectionProps) => {
     return (
         <>
             <StyledCardHeader>

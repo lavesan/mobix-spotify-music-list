@@ -18,7 +18,7 @@ export default () => {
                 const album = await spotifyService.getAlbumData(albumData.albumId);
 
                 if (album) {
-                    const { name, tracks, popularity, release_date, total_tracks, artists, images } = album;
+                    const { name, tracks, release_date, total_tracks, artists, images } = album;
 
                     const albumTracks = tracks.items.map(({ name, duration_ms, external_urls }: any) => ({
                         trackName: name,
@@ -26,7 +26,6 @@ export default () => {
                         playOnSpotifyUrl: external_urls.spotify,
                     }));
                     setAlbumInfo({
-                        popularity,
                         albumName: name,
                         tracks: albumTracks,
                         artistsNames: artists.map((artist: any) => artist.name),
@@ -41,7 +40,7 @@ export default () => {
         } else {
             history.push('home');
         }
-    }, []);
+    }, [history, spotifyService]);
 
     return (
         <StyledSectionCard>

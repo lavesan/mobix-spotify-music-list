@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { StyledH2 } from '../home.styles';
 import { StyledArtistsFilterBox, StyledLogSpotifyLink } from './section1.styles';
 import { SelectComponent } from './select';
@@ -14,13 +14,15 @@ export default () => {
     const { spotifyService } = useContext(AppContext);
     const { setChartData, setMusicsListed } = useContext(HomePageContext);
 
-    const options = [
-        { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.', color: 'gray' },
-        { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera', color: 'red' },
-        { value: '1dfeR4HaWDbWqFHLkxsg1d', label: 'Queen', color: 'black' },
-        { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts', color: '#aaa' },
-        { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga', color: 'green' },
-    ];
+    const [options] = useState(
+        [
+            { value: '1on7ZQ2pvgeQF4vmIA09x5', label: 'Charlie Brown Jr.', color: 'gray' },
+            { value: '14pVkFUHDL207LzLHtSA18', label: 'Pantera', color: 'red' },
+            { value: '1dfeR4HaWDbWqFHLkxsg1d', label: 'Queen', color: 'black' },
+            { value: '3lDpdwM8KILepMHqBWUhIA', label: 'The Struts', color: '#aaa' },
+            { value: '2ZofT7n9AlTKf7KDCoHGgD', label: 'Luiz Gonzaga', color: 'green' },
+        ]
+    );
 
     const handleChooseArtist = async ({ value, color }: any) => {
         const albums = await spotifyService.getArtistAlbums(value);
@@ -35,14 +37,13 @@ export default () => {
         }
     }
 
-    useEffect(() => {
-        // Gets all top tracks of all artists on the select option
-        (async () => {
+    const handleInit = useCallback(
+        async () => {
             let musicTracks: MusicCardComponentProps[] = [];
-
+    
             for(const { value } of options) {
                 const artistTopTrack = await spotifyService.getArtistTopTracks(value);
-
+    
                 if (artistTopTrack) {
                     musicTracks = [
                         ...musicTracks,
@@ -60,8 +61,13 @@ export default () => {
                 }
             }
             setMusicsListed(musicTracks);
-        })()
-    }, []);
+        }, [options, setMusicsListed, spotifyService]
+    ) 
+
+    useEffect(() => {
+        // Gets all top tracks of all artists on the select option
+        handleInit();
+    }, [handleInit]);
 
     return (
         <>
