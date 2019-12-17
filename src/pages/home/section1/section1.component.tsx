@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
+import * as am4core from "@amcharts/amcharts4/core";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+
 import { StyledH2 } from '../home.styles';
 import { StyledArtistsFilterBox, StyledLogSpotifyLink } from './section1.styles';
 import { SelectComponent } from './select';
 import { RangePickerComponent } from './range-picker';
 import { AppContext } from '../../../app/App.context';
 import { HomePageContext } from '../home.context';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { MusicCardComponentProps } from '../section3/music-card/music-card.types';
-import * as am4core from "@amcharts/amcharts4/core";
+import { SelectArtistType } from './section1.types';
 
 export default () => {
     const { spotifyService } = useContext(AppContext);
     const { setChartData, setMusicsListed } = useContext(HomePageContext);
 
-    const [options] = useState(
+    const [options] = useState<SelectArtistType[]>(
         [
             { value: '6olE6TJLqED3rqDCT0FyPh', label: 'Nirvana', color: 'gray' },
             { value: '4NpFxQe2UvRCAjto3JqlSl', label: 'Gretta Van Fleet', color: 'red' },
@@ -24,7 +26,7 @@ export default () => {
         ]
     );
 
-    const handleChooseArtist = async ({ value, color }: any) => {
+    const handleChooseArtist = async ({ value, color }: SelectArtistType) => {
         const albums = await spotifyService.getArtistAlbums(value);
         if (albums) {
             // Filter to get only the albums and remove the compilations
@@ -49,17 +51,16 @@ export default () => {
                 const artistTopTrack = await spotifyService.getArtistTopTracks(value);
     
                 if (artistTopTrack) {
-                    musicTracks = [
-                        ...musicTracks,
-                        ...artistTopTrack.tracks.map(({ disc_number, explicit, name, popularity, track_number, album: { id } }: any) => ({
-                            explicit,
-                            popularity,
-                            albumId: id,
-                            diskNumber: disc_number,
-                            trackNumber: track_number,
-                            musicName: name,
-                        }))
-                    ]
+                    const mapToMusicListed = artistTopTrack.tracks.map(({ disc_number, explicit, name, popularity, track_number, album: { id } }: any) => ({
+                        explicit,
+                        popularity,
+                        albumId: id,
+                        diskNumber: disc_number,
+                        trackNumber: track_number,
+                        musicName: name,
+                    }))
+
+                    musicTracks = musicTracks.concat(mapToMusicListed);
                 } else {
                     break;
                 }
