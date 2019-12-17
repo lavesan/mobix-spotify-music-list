@@ -63,6 +63,7 @@
     "babel-jest": "^24.0.0",
     "babel-jest-amcharts": "^0.0.2",
     "babel-preset-react-app": "^9.0.0",
+    "jest-styled-components": "^6.3.4",
     "react-test-renderer": "^16.12.0"
   }
 }
