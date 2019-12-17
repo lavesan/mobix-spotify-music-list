@@ -1,31 +1,16 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 import { HomePage } from '../pages/home';
 import musicInfoPage from '../pages/music-info/music-info.page';
 import { StyledPagesContainer } from './App.styles';
 import { AppContext } from './App.context';
 import { SpotifyService } from '../services/spotify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const theme = {
-  site: {
-    primaryColor: 'blue',
-  },
-  spotify: {
-    green: {
-      primaryColor: '#1db954',
-    },
-    dark: {
-      primaryColor: '#212121',
-      secondaryColor: '#121212',
-      terciaryColor: '#535353',
-      quaternaryColor: '#b3b3b3',
-    }
-  }
-}
+import theme from './App.theme';
 
 const App: React.FC = () => {
   const spotifyService = new SpotifyService();
