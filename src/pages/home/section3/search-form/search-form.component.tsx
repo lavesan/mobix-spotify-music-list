@@ -20,14 +20,16 @@ export default () => {
         const musics = await spotifyService.getTracksByName(music);
 
         if (musics) {
-            setMusicsListed(musics.tracks.items.map(({ name, track_number, disc_number, popularity, explicit, album: { id } }: any) => ({
+            const mapToMusicsListed = musics.tracks.items.map(({ name, track_number, disc_number, popularity, explicit, album: { id } }: any) => ({
                 explicit,
                 popularity,
                 albumId: id,
                 diskNumber: disc_number,
                 trackNumber: track_number,
                 musicName: name, 
-            })));
+            }))
+
+            setMusicsListed(mapToMusicsListed);
         }
     }
 
